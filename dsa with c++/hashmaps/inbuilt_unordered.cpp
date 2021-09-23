@@ -19,7 +19,10 @@ int main(){
         cout << "Present" << endl;
     }
     else{
-        cout << "Not present";
+        cout << "Not present" <<endl;
     }
 
+    //erase
+    mymap.erase("two");
+    cout << "two " << mymap.at("two") << endl;
 }
