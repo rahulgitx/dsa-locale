@@ -4,6 +4,9 @@
         "*.tcc": "cpp",
         "ostream": "cpp",
         "array": "cpp",
-        "string": "cpp"
+        "string": "cpp",
+        "new": "cpp",
+        "cmath": "cpp",
+        "vector": "cpp"
     }
 }

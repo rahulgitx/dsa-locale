@@ -1,66 +1,66 @@
 #include <iostream>
 using namespace std;
 
-void merge(int arr1[], int arr2[], int m, int n){
+int * merge(int* a, int* b, int m, int n){
+    int *c = new int[m+n];
     int i=0, j=0, k=0;
-    while(i<m && j<n){
-        if (arr1[i] < arr2[j]){
-            if (i == m-1){
-                cout << arr1[i] << " " << arr2[j];
-                i++; j++;
-            }
-            else{
-                cout << arr1[i] << " ";
-                i++;
-            }
+    while(i<m || j<n){
+        if((*(a+i) < *(b+j)) && (i<m) && (j<n)){
+            *(c+k) = *(a+i);
+            k++;
+            i++;
         }
-        else if( arr1[i] > arr2[j]){
-            if (j == n-1){
-                cout << arr2[j] << " " << arr1[i] << " " ;
-                j++; i++;
-            }
-            else{
-                cout << arr2[j] << " ";
-                j++;
-            }
-            
+        if((*(a+i) >= *(b+j)) && (j<n) && (i<m)){
+            *(c+k) = *(b+j);
+            k++; j++;
         }
-        else{
-            cout << arr2[j] << " " << arr1[i] << " " ;
-            i++; j++;
+        if((i==m) && (j<n)){
+            *(c+k) = *(b+j);
+            j++; k++;
+        }
+        if((j==n) && (i<m)){
+            *(c+k) = *(a+i);
+            i++; k++;
         }
     }
-    cout << endl;
+    
+    return c;
 }
 
-void mergesort(int arr[], int m){
-    int mid = m/2;
-    if (mid >= 1){
-        int arrleft[mid];
-        for (int i=0; i<mid; i++){
-            arrleft[i] = arr[i];
-        }
-        int arrright[m-mid];
-        for (int i=mid; i<m; i++){
-            arrright[i]=arr[i];
-        }
-        mergesort(arrleft, sizeof(arrleft)/sizeof(arrleft[0]));
-        mergesort(arrleft, sizeof(arrleft)/sizeof(arrleft[0]));
-
+int* mergesort(int* arr, int f, int l){
+    if (f<l){    
+        int mid = (f+l)/2;
+        int *a = mergesort(arr, f, mid);
+        int *b = mergesort(arr, mid+1, l);
+        int m = mid - f + 1;
+        int n = l - mid + 1; 
+        return merge(a, b, m, n);
     }
     else{
-        
-    }
-
+        int *endcase = new int {*(arr+f)};
+        return endcase;
+    }    
 }
 
 
 int main()
 {
-    int arr1[3] = {1, 5, 9};
-    int arr2[4] = {2, 7, 11};
-    // merge(arr1, arr2, 3, 4);
-    int arr[8] = { 4, 3, 9, 7, 8, 1, 6, 2};
-    mergesort(arr, 8);
+    int m=3, n=3;
+    int *arr1 = new int[m] {6,4,2};
+    int *arr2 = new int[n] {7,3,1};
+    int* c = merge(arr1, arr2, 3, 4);
+    for (int i=0; i<(m+n); i++){
+        cout << *(c+i) << " ";
+    }
+    cout << endl;
+    
+    // int x = 8;
+    // int *arr = new int[x] {4, 3, 9, 7, 8, 1, 6, 2};
+    // int mid = x/2;
+    // int f = 0, l = x-1;
+    // int *output = mergesort(arr,f, l);
+    // for (int i=0; i<(x); i++){
+    //     cout << *(output+i) << " ";
+    // }
 
 }
