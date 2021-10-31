@@ -25,6 +25,7 @@ int main()
     l1.push_back(56);
     l1.push_back(13);
     l1.push_back(14);
+    cout << "displaying: " << endl;
     display(l1);
     l1.pop_back();
     display(l1);
