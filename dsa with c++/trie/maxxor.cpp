@@ -1,7 +1,6 @@
 #include <iostream>
 #include <vector>
 #include <unordered_map>
-#include <algorithm>
 using namespace std;
 
 struct node{
@@ -10,78 +9,94 @@ struct node{
     int isterminal;
     node(int b){
         this->bin = b;
-        isterminal = 0;
+        this->isterminal = 0;
     }
 };
 
 class trie{
-    node* root = new node('-1');
+    node *root = new node(-1);
     public:
-        void findmaxxor(unordered_map<int, vector<int> > mp)){
-            for(auto it : mp){
-                vector<int> v = it.second;
-
-                node* temp = root;     // inserted the vector of binaries
-                for(int i=0; i<v.size(); i++){
-                    if(temp->mp.count(v[i]) == 0){
-                        node* newnode = new node(v[i]);
-                        temp->mp[v[i]] = newnode;
-                        temp = newnode;
-                    }
-                    else{
-                        temp = temp[v[i]];
-                    }
+        void insertnum(int n){
+            node* temp = root;
+            int k;
+            for(int i=31; i>=0; i--){
+                k = (n >> i);
+                k = (k&1);
+                if(temp->mp.count(k) == 0){
+                    node *newnode = new node(k);
+                    temp->mp[k] = newnode;
+                    temp = temp->mp[k];
+                    // cout << k << " inserted"<< endl;
                 }
-                auto itsecond = it++;
-                vector<int> v2 = itsecond.second;
-                temp = root;
-                for(int i=0; i<v2.size(); i++){
-                    
+                else{
+                    temp = temp->mp[k];
                 }
             }
-            vector<int> v = mp[]
-            
+            temp->isterminal = n;
+            // cout << n << " digit has been inserted" << endl;
         }
+
+        vector<int> maxfromtrie(int n){
+            vector<int> ans;
+            node *temp = root;
+            int xorval = 0;
+            for(int i=31; i>=0; i--){
+                int cb = (n&(1<<i)) ? 1:0 ;        // current bit starting from the 32nd bit.
+                if (temp->mp.count(cb^1) != 0){
+                    // cout << "found different" << endl;
+                    temp = temp->mp[cb^1];
+                    xorval |= (1<<i);
+                }  
+                else{
+                    // cout << "found same" << endl;
+                    temp = temp->mp[cb];
+                }
+            }
+            ans.push_back(xorval);
+            ans.push_back(temp->isterminal);
+            return ans;
+        }
+
+
 };
+
+void maxxor(vector<int> arr){
+    trie t;
+    int maxxor = 0;
+    int val1, val2;
+    t.insertnum(arr[0]);
+    vector<int> maxxorandval;
+    for(int i=1; i<arr.size(); i++){
+        // cout << "for i: " << i << endl;
+        maxxorandval = t.maxfromtrie(arr[i]);
+        if(maxxor < maxxorandval[0]){
+            maxxor = maxxorandval[0];
+            val1 = maxxorandval[1];
+            val2 = arr[i];
+            // cout << "values incremented" << endl;
+        }
+        t.insertnum(arr[i]);
+        // cout << endl << endl;
+    }
+
+    cout << val1 << " " << val2;
+}
 
 int main(){
     int n;
     cin >> n;
-    int arr[n];
-    int maxim = 0;
-    unordered_map<int, vector<int>> input;
-    for(int i=0; i<n; i++){                     // taking individual nos
-        cin >> arr[i];
-        if(arr[i] > maxim){
-            maxim = arr[i];
-        }
+    vector<int> arr;
+    int temp;
+    for(int i=0; i<n; i++){
+        cin >> temp;
+        arr.push_back(temp);
     }
 
-    int maxdigits = 0;                          // finding the max binary digits among input nos
-    while(maxim!=0){
-        maxim = maxim/2;
-        maxdigits++;
-    }
-
-    for(int i=0; i<n; i++){                     // converting each integers into binary and adding the extra 0s
-        int temp = arr[i];
-        while(temp!=0){
-            input[arr[i]].push_back(temp%2);
-            temp = temp/2;
-        }
-        int diff = maxdigits - input[arr[i]].size();
-        for(int j=0; j<diff; j++){
-            input[arr[i]].push_back(0);
-        }
-        reverse(input[arr[i]].begin(), input[arr[i]].end());
-    }
-
-    for( auto it : input){                      // printing it out
-        cout << it.first << ": ";
-        for(auto num : it.second){
-            cout << num << " ";
-        }
-        cout << endl;
-    }
-    // findmaxxor(arr);
+    maxxor(arr);
 }
+
+
+/*
+5
+3 5 4 7 1
+*/
