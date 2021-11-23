@@ -19,35 +19,58 @@ void print(unordered_set<string> s){
     }
 }
 
+void print(unordered_set<int> s){
+    unordered_set<int>::iterator it;
+    for(it=s.begin(); it!=s.end(); ){
+        if(*it > 0){
+            it = s.erase(it);
+            cout << "erased";
+            // if(s.empty()){
+                // break;
+            // }
+        }
+        else{
+            it++;
+        }
+        cout << *it << endl;
+    }
+}
 
 int main(){
-    unordered_set<string> s;
-    s.insert("abc");
-    s.insert("abc");
-    s.insert("rahul");
-    s.insert("ads");
-    s.insert("sdfalp");
+    // unordered_set<string> s;
+    // s.insert("abc");
+    // s.insert("abc");
+    // s.insert("rahul");
+    // s.insert("ads");
+    // s.insert("sdfalp");
 
-    // checking whether a element is present or not
-    cout << endl;
-    auto val = s.find("rahul");
-    if(val != s.end() ){               // if the value does not exist the end pointer will be handed over to the val variable
-        cout << *val << endl;
-    }
+    // // checking whether a element is present or not
+    // cout << endl;
+    // auto val = s.find("rahul");
+    // if(val != s.end() ){               // if the value does not exist the end pointer will be handed over to the val variable
+    //     cout << *val << endl;
+    // }
 
-    // erasing an element
-    s.erase(val);         // directly from the iterator which is pointing to that element.
-    s.erase("ads");         // and directly writing the element
-    cout << endl;
-    print(s);
+    // // erasing an element
+    // s.erase(val);         // directly from the iterator which is pointing to that element.
+    // s.erase("ads");         // and directly writing the element
+    // cout << endl;
+    // print(s);
 
-    unordered_set<pair<int, int>> sp;
-    sp.insert({1,3});
-    sp.insert({2,3});
-    sp.insert({1,5});
-    sp.insert({4,3});
-    for(auto value : sp){
-        cout << value.first << " : " <<  value.second << endl;
-    }
+    // unordered_set<pair<int, int>> sp;
+    // sp.insert({1,3});
+    // sp.insert({2,3});
+    // sp.insert({1,5});
+    // sp.insert({4,3});
+    // for(auto value : sp){
+    //     cout << value.first << " : " <<  value.second << endl;
+    // }
+
+    unordered_set<int> mys;
+    mys.insert(4);
+    mys.insert(2);
+    // mys.insert(-1);
+    // mys.insert(-2);
+    print(mys);
 
 }

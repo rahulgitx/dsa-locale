@@ -9,7 +9,13 @@
         "cmath": "cpp",
         "vector": "cpp",
         "unordered_map": "cpp",
-        "regex": "cpp"
+        "regex": "cpp",
+        "ratio": "cpp",
+        "system_error": "cpp",
+        "functional": "cpp",
+        "tuple": "cpp",
+        "type_traits": "cpp",
+        "utility": "cpp"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }
