@@ -11,6 +11,19 @@ using namespace std;
 //     mintime = max(places[0]-arr[0], median-arr[arr.size()-1]);
 // }
 
+int count = 0;
+
+int fibonacci(int n){
+    count++;
+    cout << "count ";
+    if(n <= 1){
+        return n;
+    }
+    else{
+        return fibonacci(n-1)+fibonacci(n-2);
+    }
+}
+
 int main(){
     // map<int, int> mp;
     // mp[6] = 1;
@@ -34,12 +47,17 @@ int main(){
 
     // cout << total;
 
-    int n = 5;
-    int arr[n];
-    for(int i=0; i<n; i++){
-        cout << arr[i] << " ";
-    }
+    // int n = 5;
+    // int arr[n];
+    // for(int i=0; i<n; i++){
+    //     cout << arr[i] << " ";
+    // }
 
+    // int *count = new int;
+    // *count = 0;
+
+    // cout << fibonacci(7) << endl;
+    cout << count; 
 }
 
 
