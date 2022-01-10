@@ -12,7 +12,7 @@ void rotate(int arr[], int n, int k){
     for(int i=0; i<n; i++){
         cout << rotated[i] << " ";
     }
-}
+}   
 
 int main(){
     int n, k;

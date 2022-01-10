@@ -54,11 +54,11 @@ int findmax(int arr[], int n){
 
 }
 
-int func(int arr[], int n, int k){
-        int maxim = 0;
-        int prefsum[n];
-        int diff[n];
-        unordered_map<int, int> mp;
+long long int func(long long int arr[], int n, int k){
+        long long int maxim = 0;
+        long long int prefsum[n];
+        long long int diff[n];
+        unordered_map<long long int, int> mp;
         prefsum[0] = arr[0];
         mp[prefsum[0]] = 0;
         diff[0] = prefsum[0]%k;
@@ -79,7 +79,7 @@ int func(int arr[], int n, int k){
     }
     cout << endl;
 
-    for(int i=0; i<n; i++){
+    for(long long int i=0; i<n; i++){
         if(diff[i] == 0){
             maxim = max(maxim, i+1);
         }
@@ -97,7 +97,7 @@ int func(int arr[], int n, int k){
 int main(){
     int n, k;
     cin >> n >> k;
-    int arr[n];
+    long long int arr[n];
     for(int i=0; i<n; i++){
         cin >> arr[i];
     }
@@ -193,4 +193,10 @@ ans=13
 /*
 6 5
 4 5 0 -2 -3 1
+*/
+
+/*
+1 7
+8
+ans=0
 */

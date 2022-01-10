@@ -60,7 +60,7 @@ int knapSackmemo(int w, int wt[], int val[], int n){
         return 0;
     }
     int **dp = new int*[w+1];
-    for(int i=0; i<w+1; i++){
+    for(int i=0; i<w+1; i++){ 
         dp[i] = new int[n+1];
         for(int j=0; j<n+1; j++){
             dp[i][j] = -1;
