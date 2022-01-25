@@ -1,5 +1,12 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+string longest(string s){
     // initialization
     int n = s.length();
+    if (n == 1){
+        return s;
+    }
     int** dp = new int*[n];
     for(int i=0; i<n; i++){
         dp[i] = new int[n];
@@ -9,7 +16,7 @@
     }
 
     int maxval = 0;
-    int first, last;
+    int first = 0, last = 0;
 
     for(int i=0; i<n; i++){
         dp[i][i] = 1;
@@ -36,7 +43,7 @@
     //     cout << endl;
     // }
 
-    for(int i=n-2; i>=0; i--){
+    for(int i=n-3; i>=0; i--){
         for(int j=i+2; j<n; j++){
             if(s[i] == s[j] && dp[i+1][j-1] == 1){
                 dp[i][j] = 1;
@@ -66,3 +73,18 @@
     }
     // cout << "ans: " << ans;
     return ans;
+}
+
+int main(){
+    string s;
+    cin >> s;
+    cout << longest(s);
+}
+
+/*
+aacabdkacaa
+*/
+
+/*
+aaaabbaa
+*/

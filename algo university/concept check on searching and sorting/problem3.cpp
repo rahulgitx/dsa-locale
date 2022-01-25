@@ -1,7 +1,10 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-unsigned long long int findmin(unsigned long long int arr[], unsigned long long int n, long long int m){
+signed long long int findmin(unsigned long long int arr[], unsigned long long int n, long long int m){
+    if(m > n){
+        return -1;
+    }
     unsigned long long int maxim = 0, sum=0;
     for(int i=0; i<n; i++){
         maxim = max(arr[i], maxim);
@@ -36,9 +39,14 @@ unsigned long long int findmin(unsigned long long int arr[], unsigned long long 
             right = mid-1;
         }
     }
+    cout << lastans << " " << m << endl;
     if(lastans == 0){
         return maxim;
     }
+    
+    // else if (lastans < m){
+    //     return -1;
+    // }
     return lastans;
 }
 
@@ -94,4 +102,11 @@ ans=8
 /*
 7 4
 1 1 1 8 1 1 1
+ans=8
+*/
+
+/*
+5 6
+1 2 3 4 5
+ans=-1
 */

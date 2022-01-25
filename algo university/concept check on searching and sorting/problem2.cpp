@@ -1,10 +1,10 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int bsearch(long long int k, int arr[], int n){
-    int left = 0;
-    int right = n-1;
-    int mid = (left+right)/2;
+long long int bsearch(long long int k, long long int arr[], long long int n){
+    long long int left = 0;
+    long long int right = n-1;
+    long long int mid = (left+right)/2;
     cout << "k: " << k << endl;
     if(k > arr[right]){
         return 0;
@@ -41,11 +41,11 @@ int bsearch(long long int k, int arr[], int n){
 }
 
 int main(){
-    int n; 
+    long long int n; 
     cin >> n;
-    int arr[n];
-    int temp;
-    for(int i=0; i<n; i++){
+    long long int arr[n];
+    long long int temp;
+    for(long long int i=0; i<n; i++){
         cin >> temp;
         // if(temp == 0){
         //     continue;
@@ -54,7 +54,7 @@ int main(){
     }
 
     sort(arr, arr+n);
-    for(int i=0; i<n; i++){
+    for(long long int i=0; i<n; i++){
         cout << arr[i] << " ";
     }
     cout << endl;
@@ -75,9 +75,9 @@ int main(){
 
     long long int count = 0;
     // int sidesum;
-    for(int i=0; i<n; i++){
-        for(int j=i+1; j<n; j++){
-            int x = bsearch(arr[i]+arr[j], arr, n);
+    for(long long int i=0; i<n; i++){
+        for(long long int j=i+1; j<n; j++){
+            long long int x = bsearch(arr[i]+arr[j], arr, n);
             cout << "x: " << x << endl;
             count += x;
             cout << "count: " << count << endl;
