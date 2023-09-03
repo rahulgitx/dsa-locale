@@ -45,7 +45,7 @@ void main()
 
     node* roott = new node(1);
     roott->left = new node(2);
-    roott->right = new node(3);
+    roott->right = new node(3); 
     root->left->left = new node(4);
     roott->left->right = new node(5);
     roott->right->left = new node(6);

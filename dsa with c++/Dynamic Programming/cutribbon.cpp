@@ -29,7 +29,7 @@ int cutribbon(int n, int arr[]){
     for(int i=1; i<4; i++){
         for(int j=1; j<n+1; j++){
             if(j >= arr[i-1]){
-                dp[i][j] = max(dp[i][j-arr[i-1]]+1, dp[i-1][j]);
+                dp[i][j] = max(dp[i][j-arr[i-1]]+1, dp[i-1][j]);    
             }
             else{
                 dp[i][j] = dp[i-1][j];
