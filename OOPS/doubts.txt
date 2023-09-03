@@ -1,4 +1,0 @@
-1. What is a member class ? (ref: gfg difference between classes and structures)
-2. What are the things we cannot do with structures?
-3. The OS is 64bit but the word addressing is done for 4 bytes while running the c++ code. 
-  -> ans : this is instructed by the compiler to make cpu do the word processing of 4 bytes.

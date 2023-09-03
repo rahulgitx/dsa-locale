@@ -1,2 +1,0 @@
- Q1.  if we have a record of bio data of students in an excel sheet is not data but information as it does make sense to the user as 
-	we can easily see what a particular column of a row means.. unlike an csv file which is pure raw data separated by commas
