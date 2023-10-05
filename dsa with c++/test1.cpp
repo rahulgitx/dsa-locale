@@ -18,4 +18,5 @@ int main(){
     cout << st.size() << endl;
     st.erase(1);
     cout << st.size();
+    unordered_map<vector<int>, int> mp;
 }
