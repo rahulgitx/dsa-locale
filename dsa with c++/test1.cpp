@@ -1,22 +1,20 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+void printBinary(int a){
+    for(int i=31; i>=0; i--){
+        if(((1<<i)&a)>>i) cout << 1;
+        else cout << 0;
+    }
+    cout << endl;
+}
 
 int main(){
-    // unordered_map<int, int> mp;
-    // cout << "size: " << mp.size() << endl;
-    // mp[1]++;
-    // cout << mp[1] << endl;
-    // mp.erase(1);
-    // cout << mp[1] << endl;
-    // if(mp.count(1) == 1) { cout << "present" << endl; }
-    // if(mp.count(2) == 1) { cout << "pressent 2" << endl; }
-    // cout << "size:" << mp.size() << endl ;
-
-    unordered_set<int> st;
-    st.insert(1);
-    cout << st.size() << endl;
-    st.erase(1);
-    cout << st.size();
-    unordered_map<vector<int>, int> mp;
+    int a = INT_MIN;
+    // a &= -a;
+    int b = a & (-a);
+    cout << b;
+    // printBinary(a);
+    // a = -a;
+    // printBinary(a);
 }

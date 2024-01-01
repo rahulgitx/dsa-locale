@@ -1,5 +1,4 @@
-#include <iostream>
-#include <stdio.h>
+#include <bits/stdc++.h>
 using namespace std;
 
 int ith(int n, int pos){
@@ -21,6 +20,8 @@ int main(){
     int pos = 6;
     // cout << "no of set bits " << __builtin_popcount(n) << endl;
     int output = ith(n, pos);
-    cout << output;
+    cout << output << endl;
+    vector<int> v(1);
+    for(int i=0; i<v.size(); i++) cout << v[i] << " ";
     
 }
