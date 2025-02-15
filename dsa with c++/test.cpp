@@ -15,12 +15,22 @@ using namespace std;
 
 
 int main(){
-    int arr[5];
-    for(int i=0; i<5; i++){
-        arr[i] = i;
+    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
+    pq.push({1,2});
+    pq.push({1,1});
+    pq.push({3,4});
+    while(pq.size()){
+        cout << pq.top().first << "," << pq.top().second << endl;
+        pq.pop();
     }
-    for(int i=0; i<5; i++){
-        cout << arr[i] << endl;
+
+    int n = 3;
+    int at[3]={1,2,3};
+    int dt[3] = {1,2,3};
+    vector<vector<int>> timeSlab(n);
+    for(int i=0; i<n; i++){
+        vector<int> v = {at[i], dt[i]};
+        timeSlab[i] = v;  
     }
 }
 

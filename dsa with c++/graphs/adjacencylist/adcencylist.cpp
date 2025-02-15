@@ -30,8 +30,8 @@ class graph{
 };
 
 int main(){
-    graph g(4);
-    g.addedges(0,1);
+    graph g(4);  // graph having 4 nodes
+    g.addedges(0,1);   // an edge from 0 -> 1 (ans also 1 -> 0 as per addedges' implementation)
     g.addedges(0,2);
     g.addedges(1,2);
     g.addedges(2,3);

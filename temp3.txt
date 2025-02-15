@@ -1,0 +1,67 @@
+class Solution {
+    int getParent(int node, HashMap<Integer, Integer> parent){
+        if(parent.get(node) == node) return node;
+        return getParent(parent.get(node), parent);
+    }
+    public int removeStones(int[][] stones) {
+        int n = stones.length;
+
+        HashMap<Integer, Integer> rank = new HashMap<>();
+        HashMap<Integer, Integer> parent = new HashMap<>();
+        int[] xParent = new int[1001];
+        int[] yParent = new int[1001];
+        for(int i=0; i<1001; i++){
+            xParent[i] = -1; yParent[i] = -1;
+        }
+
+        int noOfComp = 0;
+        for(int i=0; i<n; i++){
+            int r = stones[i][0], c = stones[i][1];
+            int u = r*10000 + c;
+            if(!parent.containsKey(u)) parent.put(u, u);
+
+            if(xParent[r] == -1){
+                xParent[r] = u;
+            }
+            else{
+                int v = xParent[r];
+                u = getParent(u, parent);
+                v = getParent(v, parent);
+                if(rank.getOrDefault(u, 0) > rank.getOrDefault(v, 0)){
+                    parent.put(v, u);
+                    xParent[r] = u;
+                    if(rank.getOrDefault(u, 0) == rank.getOrDefault(v, 0)) rank.put(u, rank.getOrDefault(u, 0)+1);
+                }
+                else{
+                    parent.put(u, v);
+                    xParent[r] = v;
+                }
+            }
+            if(yParent[c] == -1){
+                yParent[c] = u;
+            }
+            else{
+                int v = yParent[c];
+                u = getParent(u, parent); 
+                v = getParent(v, parent);
+                if(rank.getOrDefault(u, 0) >= rank.getOrDefault(v, 0)){
+                    parent.put(v, u);
+                    yParent[c] = u;
+                    if(rank.getOrDefault(u, 0) == rank.getOrDefault(v, 0)) rank.put(u, rank.getOrDefault(u, 0)+1);
+                }
+                else{
+                    parent.put(u, v);
+                    yParent[r] = v;
+                }
+            }
+            System.out.println("currStone: "+u + " parent: " + parent.get(u));
+        }
+        HashSet<Integer> st = new HashSet<>();
+        for(Map.Entry<Integer, Integer> entry : parent.entrySet()){
+            st.add(getParent(entry.getValue(), parent));
+            // System.out.println("node:" + entry.getValue() + " parent:" + parent.get(entry.getValue()));
+        }
+        System.out.println(st.size());
+        return n-st.size();
+    }
+}

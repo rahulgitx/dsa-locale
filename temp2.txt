@@ -1,0 +1,82 @@
+class Solution {
+    int m = 10000007;
+    long ncr(int n, long r){
+        // if(n==0) return 0;
+        long n_r = n-r;
+        long res = 1L;
+        while(n > 1){
+            long t = n;
+            if(n_r > 0 && t%n_r==0){
+                t = t/n_r;
+                n_r--;
+            }
+            if(r>0 && t%r==0){
+                t = t/r;
+                r--;
+            }
+            res = ((res%m)*(t%m))%m;
+            // System.out.println(res);
+            n--;
+        }
+        long d = 1L;
+        while(r>1L){
+            d = ((d%m) * ((long)r%m))%m;
+            r--;
+        }
+        while(n_r > 1L){
+            d = ((d%m) * (n_r%m))%m;
+            n_r--;
+        }
+        return res/d;
+    }
+    int getSum(int n){
+        int sum = 0;
+        for(int i=0; i<32; i++){
+            if((((1<<i)&n)>>i)==1) sum++;
+        }
+        return sum;
+    }
+    int helper(int n){
+        if(n==0 || n==1) return 0;
+
+        int bitsCount = getSum(n);
+
+        return helper(bitsCount) + 1;
+    }
+
+    public long countKReducibleNumbers(String s, int k) {
+        int n = s.length();
+        long[] countCombs = new long[n+1];
+        int onesOnLeft = 0;
+        for(int i=0; i<n; i++){
+            if(s.charAt(i)=='0') continue;
+
+            int places = n-i-1;
+            for(int j=0; j<=places; j++){
+                long ncr = ncr(places, (long)j);
+                // System.out.println(places + " " + j + " " + ncr);
+                countCombs[j+onesOnLeft] =  ((countCombs[j+onesOnLeft]%m) + (ncr%m))%m;
+            }
+            onesOnLeft++;
+        }
+
+        // for(long i=0; i<=n; i++){
+        //     System.out.println(i + ":" + countCombs[i] + " ");
+        // }
+        // System.out.println();
+
+        // int[] dp = new int[n+1];
+        // dp[0] = 0;
+        // dp[1] = 0;
+        long res = 0L;
+        // long t = 0;
+        for(int i=1; i<n+1; i++){
+            int noOfOps = 1+helper(i);
+            // System.out.println(i + " ops: " + noOfOps);
+            if(noOfOps <= k) res = ((res%m) + (countCombs[i]%m))%m;
+        }
+
+        return (int)(res%m);
+
+    }
+}

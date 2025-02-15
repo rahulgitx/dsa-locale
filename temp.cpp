@@ -1,29 +1,27 @@
-#include <iostream>
 #include <bits/stdc++.h>
 using namespace std;
 
-int smallestLeftOut(string& s, unordered_map<string, int>& mp, int startIndex, int lastIndex){
-    string temp = "";
-    for(int k=startIndex; k<=lastIndex; k++){
-        temp += s[k];
-    }
-
-    cout << "temp: " << temp << endl;
-
-    while(temp.size()){
-        if(mp[temp]) return (lastIndex-startIndex+1)-temp.size();
-        temp = temp.erase(0,1);
-    }
-    return (lastIndex-startIndex+1);
-}
-
+class Robot{
+    public:
+        int health;
+        int position;
+        char direction;
+        int initialIndex;
+        bool alive = true;
+        Robot(int health, int pos, char dir, int ind){
+            this->health = health;
+            this->position = pos;
+            this->direction = dir;
+            this->initialIndex = ind;
+        }
+};
 int main(){
-    unordered_map<string, int> mp;
-    mp["leet"]++;
-    mp["code"]++;
-    mp["leetcode"]++;
-    string s = "code";
-
-    cout << "Smallest leftout : " << smallestLeftOut(s, mp, 0, s.size()-1);
+  stack<int> st;
+  st = {1};
 }
 
+/*
+2 3 5 7 11 13 17 19 23 29 31 37 41 43 47 53 59 61 67 71 73 79 83 89 97 
+2 3 5 7 11 13 17 19 23 29 31 37 41 43 47 53 59 61 67 71 73 79 83 89 97
+2 3 5 7 11 13 17 19 23 29 31 37 41 43 47 53 59 61 67 71 73 79 83 89 97
+*/

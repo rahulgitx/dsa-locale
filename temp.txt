@@ -1,0 +1,63 @@
+class Solution {
+    int mod = 1000000007;
+    long getExpMult(int m, int d, HashMap<Integer, Long> dp){
+        // System.out.println(d);
+        if(d == 0) return 1;
+        if(d == 1) return m;
+        if(dp.containsKey(d)) return dp.get(d);
+        long a = getExpMult(m, d/2, dp);
+        long b = getExpMult(m, d - d/2, dp);
+
+
+        dp.put(d, (a * b)%mod);
+        // System.out.println(d + " "+ dp.get(d));
+        return dp.get(d);
+    }
+
+    public int[] getFinalState(int[] nums, int k, int multiplier) {
+        if(multiplier == 1) return nums;
+
+        int n = nums.length;
+        HashMap<Long, Long> mp = new HashMap<>();
+        HashSet<Integer> st = new HashSet<>();
+        Comparator<Long[]> comp = (a, b) -> {
+            int firstComparison = a[0].compareTo(b[0]); // Compare the first elements
+            if (firstComparison != 0) {
+                return firstComparison; // If they are not equal, return the comparison result
+            }
+            return a[1].compareTo(b[1]); // If the first elements are equal, compare the second elements
+        };
+        PriorityQueue<Long[]> pq = new PriorityQueue<>(comp);
+        for(int i=0; i<n; i++) pq.add(new Long[]{(long)nums[i], (long)i});
+
+        while(k>0 && mp.size() < n){
+            Long[] top = pq.poll();
+            pq.add(new Long[]{(top[0]*multiplier)%mod, top[1]});
+            k--;
+            mp.put(top[1], mp.getOrDefault(top[1], 0l)+1);
+        }
+
+        int divisor = k/n, remainder = k%n;
+        // System.out.println(divisor + " " + remainder);
+        // long[] dp = new long[divisor+1];
+        HashMap<Integer, Long> dp = new HashMap<>();
+        // dp[0] = 1; dp[1] = multiplier;
+        long e = 1; //getExpMult(multiplier, divisor, dp);
+        // System.out.println(e);
+
+        int[] res = new int[n];
+        while(!pq.isEmpty()){
+            Long[] top = pq.poll();
+            top[0] = (top[0]%mod * e%mod)%mod;
+            if(remainder > 0) {
+                // System.out.println(top[0] + " " + top[1]);
+                top[0] = (top[0]%mod * multiplier%mod)%mod;
+                // System.out.println("after " + top[0]);
+                remainder--;
+            }
+            // if(top[1] == 2) System.out.println(top[0]);
+            res[top[1].intValue()] = top[0].intValue();
+        }
+        return res;
+    }
+}

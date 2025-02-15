@@ -25,9 +25,6 @@ vector<int> func(int area){
 }
 
 int main(){
-    int area;
-    cin >> area;
-    vector<int> ans;
-    ans = func(area);
-    cout << ans[0] << " " << ans[1];
+    vector<int> v(3);
+    for(int i=0; i<3; i++) cout << v[i] << " ";
 }
